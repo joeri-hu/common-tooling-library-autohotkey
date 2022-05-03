@@ -19,8 +19,8 @@ class string {
     ; @brief
     ;   Joins two or more strings with the given delimeter.
     ; @params
-    ;   delim[in] ............ Delimeter that separates the strings.
-    ;   strings[in] .......... Strings that will be concatenated.
+    ;   delim[in] ........ Delimeter that separates the strings, defaulted to a space.
+    ;   strings[in] ...... Strings that will be concatenated.
     ; @returns
     ;   Concatenation of the given strings. If there are no strings provided,
     ;   the result is an empty string.

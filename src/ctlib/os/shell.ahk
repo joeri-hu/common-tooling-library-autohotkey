@@ -21,7 +21,7 @@ class shell {
     ; @details
     ;   Acts as a wrapper to the builtin @p ControlGetText function.
     ; @post
-    ;   The value of @p ErrorLevel depends on the function being wrapped.
+    ;   The value of @p ErrorLevel depends on the outcome of the wrapped function.
     ; @params
     ;   control[in] .......... Class name or control text.
     ;   wintitle[in] ......... WinTitle search criteria, defaulted to the active window.
@@ -39,12 +39,12 @@ class shell {
     ; @details
     ;   Acts as a wrapper to the builtin @p EnvGet function.
     ; @post
-    ;   The value of @p ErrorLevel depends on the function being wrapped.
+    ;   The value of @p ErrorLevel depends on the outcome of the wrapped function.
     ; @params
     ;   var_name[in] ......... Name of the environment variable.
     ; @returns
     ;   Value of the environment variable.
-    get_env_var(var_name) {
+    get_env_var(ByRef var_name) {
         EnvGet, value, % var_name
         return value
     }
@@ -62,20 +62,27 @@ class shell {
     ; @function
     ;   wait_for_winkey
     ; @brief
-    ;   Waits at most 1 second for each Windows key to be released.
-    wait_for_winkey() {
-        shell.wait_for_keys("lwin", "rwin")
+    ;   Waits at most the given amount of time for each Windows key to be released.
+    ; @post
+    ;   The value of @p ErrorLevel is set to 1 when the timeout has elapsed.
+    ; @params
+    ;   timeout_s[in] ........ Wait time in seconds, prefixed with T, defaulted to "T1".
+    wait_for_winkey(ByRef timeout_s := "T1") {
+        shell.wait_for_keys(timeout_s, "lwin", "rwin")
     }
 
     ; @function
     ;   wait_for_keys
     ; @brief
     ;   Waits at most 1 second for each key to be released.
+    ; @post
+    ;   The value of @p ErrorLevel is set to 1 when the timeout has elapsed.
     ; @params
+    ;   timeout_s[in] ........ Wait time in seconds, prefixed with T, defaulted to "T1".
     ;   keys[in] ............. One or more keys to wait for.
-    wait_for_keys(ByRef keys*) {
+    wait_for_keys(ByRef timeout_s := "T1", ByRef keys*) {
         for _, key in keys {
-            KeyWait, % key, T1
+            KeyWait, % key, % timeout_s
         }
     }
 }

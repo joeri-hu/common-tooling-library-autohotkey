@@ -21,7 +21,7 @@ class program {
     ; @brief
     ;   Constructs a program with a pathname and one or more parameters.
     ; @params
-    ;   pathname[in] ..... Filename of the program, optionally preceded by a filepath.
+    ;   pathname[in] ..... Filename of the program, optionally preceded with a filepath.
     ;   params[in] ....... Variable amount of parameters.
     __new(ByRef pathname, ByRef params*) {
         this._pathname := pathname
@@ -55,7 +55,7 @@ class program {
     ; @details
     ;   Acts as a wrapper to the builtin @p Run function.
     ; @post
-    ;   The value of @p ErrorLevel depends on the function being wrapped.
+    ;   The value of @p ErrorLevel depends on the outcome of the wrapped function.
     ; @returns
     ;   Process identifier of the program.
     run() {

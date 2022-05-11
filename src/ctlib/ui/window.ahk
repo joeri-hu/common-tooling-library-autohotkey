@@ -27,9 +27,13 @@ class window {
     ; @method
     ;   wait_for_focus
     ; @brief
-    ;   Waits at most 1 second for this window to become active.
-    wait_for_focus() {
-        WinWaitActive, % this.to_search_query(),, 1
+    ;   Waits the given amount of time for this window to become active.
+    ; @post
+    ;   The value of @p ErrorLevel is set to 1 when the timeout has elapsed.
+    ; @params
+    ;   timeout_s[in] ........ Wait time in seconds, defaulted to 1.
+    wait_for_focus(timeout_s := 1) {
+        WinWaitActive, % this.to_search_query(),, % timeout_s
     }
 
     ; @method

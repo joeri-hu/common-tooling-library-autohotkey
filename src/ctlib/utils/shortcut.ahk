@@ -32,7 +32,7 @@ class shortcut {
     ; @method
     ;   switch_desktop
     ; @brief
-    ;   Switches to the next or previous virtual desktop.
+    ;   Switches to another virtual desktop.
     ; @params
     ;   order[in] Cyclic order in which to cycle through the virtual desktops.
     switch_desktop(order) {
@@ -44,7 +44,7 @@ class shortcut {
     ; @method
     ;   switch_tab
     ; @brief
-    ;   Switches to the next or previous browser tab.
+    ;   Switches to another browser tab.
     ; @params
     ;   order[in] .... Cyclic order in which to cycle through the browser tabs.
     switch_tab(order) {

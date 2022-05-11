@@ -27,7 +27,7 @@ class window {
     ; @method
     ;   wait_for_focus
     ; @brief
-    ;   Waits the given amount of time for this window to become active.
+    ;   Waits at most the given amount of time for this window to become active.
     ; @post
     ;   The value of @p ErrorLevel is set to 1 when the timeout has elapsed.
     ; @params

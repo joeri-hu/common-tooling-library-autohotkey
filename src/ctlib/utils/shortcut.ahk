@@ -19,7 +19,7 @@
 ;   Group of functions that interact with the operating system by sending keyboard
 ;   shortcuts.
 class shortcut {
-    ; @method
+    ; @function
     ;   toggle_desktop
     ; @brief
     ;   Toggles between switching to the next or previous virtual desktop.
@@ -29,10 +29,10 @@ class shortcut {
         order := order.flip()
     }
 
-    ; @method
+    ; @function
     ;   switch_desktop
     ; @brief
-    ;   Switches to another virtual desktop.
+    ;   Switches to the next or previous virtual desktop.
     ; @params
     ;   order[in] Cyclic order in which to cycle through the virtual desktops.
     switch_desktop(order) {
@@ -41,19 +41,42 @@ class shortcut {
         shell.send(keys)
     }
 
-    ; @method
+    ; @function
     ;   switch_tab
     ; @brief
-    ;   Switches to another browser tab.
+    ;   Switches to the next or previous browser tab.
     ; @params
     ;   order[in] .... Cyclic order in which to cycle through the browser tabs.
     switch_tab(order) {
-        modifier := order.is_clockwise() ? "" : ["shift down", "shift up"]
-        keys := Format("{ctrl down}{{:}}{tab}{{:}}{ctrl up}", modifier*)
+        keys := Format("{ctrl down}{{:}}{tab}{{:}}{ctrl up}", shortcut.shift(order)*)
         shell.send(keys)
     }
 
-    ; @method
+    ; @function
+    ;   switch_window
+    ; @brief
+    ;   Switches to the next or previous topmost window.
+    ; @params
+    ;   order[in] . Cyclic order in which to cycle through the topmost windows.
+    switch_window(order) {
+        keys := Format("{alt down}{{:}}{esc}{{:}}{alt up}", shortcut.shift(order)*)
+        shell.send(keys)
+    }
+
+    ; @function
+    ;   shift
+    ; @brief
+    ;   Shifts the order of a cyclic keyboard shortcut.
+    ; @params
+    ;   order[in] .... Cyclic order in which to cycle through a set of items.
+    ; @returns
+    ;   Empty list if the cyclic order is clockwise. Otherwise, the key press
+    ;   sequence of the shift key.
+    shift(order) {
+        return order.is_clockwise() ? [] : ["shift down", "shift up"]
+    }
+
+    ; @function
     ;   close_tab
     ; @brief
     ;   Closes a browser tab.
@@ -63,7 +86,7 @@ class shortcut {
         shell.send("{ctrl down}w{ctrl up}")
     }
 
-    ; @method
+    ; @function
     ;   playpause_tab
     ; @brief
     ;   Plays or pauses media content within a browser tab.
@@ -73,7 +96,7 @@ class shortcut {
         shell.send("k")
     }
 
-    ; @method
+    ; @function
     ;   reload_tab
     ; @brief
     ;   Reloads a browser tab.
@@ -83,7 +106,7 @@ class shortcut {
         shell.send("{ctrl down}r{ctrl up}")
     }
 
-    ; @method
+    ; @function
     ;   select_addr_bar
     ; @brief
     ;   Selects the text of an address bar.

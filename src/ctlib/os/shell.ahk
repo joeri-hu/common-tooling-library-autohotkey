@@ -50,6 +50,17 @@ class shell {
     }
 
     ; @function
+    ;   paste
+    ; @brief
+    ;   Pastes the given text to the active window.
+    ; @params
+    ;   text[in] ............. Text to paste.
+    paste(ByRef text) {
+        ClipBoard := text
+        Send, ^v
+    }
+
+    ; @function
     ;   send
     ; @brief
     ;   Sends the given keyboard shortcut to the active window.
